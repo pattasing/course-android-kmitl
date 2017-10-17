@@ -1,6 +1,7 @@
 package kmitl.lab07.pattasing.lazyinstagram;
 
 import android.graphics.Point;
+import android.provider.ContactsContract;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,15 +11,22 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Display;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.google.gson.internal.bind.JsonAdapterAnnotationTypeAdapterFactory;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import kmitl.lab07.pattasing.lazyinstagram.adepter.PostAdapter;
 import kmitl.lab07.pattasing.lazyinstagram.api.LazyInstagramApi;
 import kmitl.lab07.pattasing.lazyinstagram.api.UserProfile;
+import kmitl.lab07.pattasing.lazyinstagram.model.Posts;
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -28,25 +36,64 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 import retrofit2.http.POST;
 
+import static kmitl.lab07.pattasing.lazyinstagram.R.layout.activity_main;
+
 public class MainActivity extends AppCompatActivity {
 
-    public static int width;
-    public static int x;
+    private List<Posts> posts = new ArrayList<>();
+    private String username;
+    public static int numView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(activity_main);
 
 
 //        getUserProfile("android");
-        getUserProfile("nature");
+//        username = "android";
+//        getUserProfile(username);
 
-        PostAdapter postAdapter = new PostAdapter(this);
-        RecyclerView recyclerView = findViewById(R.id.list);
-        recyclerView.setLayoutManager(new GridLayoutManager(this, 3));
-//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(postAdapter);
+        String[] items = getResources().getStringArray(R.array.ID);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(MainActivity.this, activity_main, items);
+
+        final Spinner spinner = (Spinner) findViewById(R.id.spinner);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                String selectItem = spinner.getSelectedItem().toString();
+                username = selectItem;
+                getUserProfile(username);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        final ImageView imageList = (ImageView) findViewById(R.id.imageList);
+        final ImageView imageGrid = (ImageView) findViewById(R.id.imageGrid);
+            imageList.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    numView = 1;
+                    imageList.setVisibility(View.INVISIBLE);
+                    imageGrid.setVisibility(View.VISIBLE);
+                    getUserProfile(username);
+                }
+            });
+
+
+            imageGrid.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    numView = 0;
+                    imageGrid.setVisibility(View.INVISIBLE);
+                    imageList.setVisibility(View.VISIBLE);
+                    getUserProfile(username);
+                }
+            });
     }
 
     private void getUserProfile(final String userName){
@@ -102,6 +149,24 @@ public class MainActivity extends AppCompatActivity {
 
                     TextView textFollower = (TextView) findViewById(R.id.textFollower);
                     textFollower.setText("Follower\n" + userProfile.getFollower());
+
+                    posts = userProfile.getPosts();
+                    PostAdapter postAdapter = new PostAdapter(MainActivity.this);
+
+                    RecyclerView recyclerView = findViewById(R.id.list);
+//                    recyclerView.setLayoutManager(new GridLayoutManager(MainActivity.this, 3));
+//                    recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
+
+                    if(numView == 1){
+                        recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
+                    }
+                    else{
+                        recyclerView.setLayoutManager(new GridLayoutManager(MainActivity.this, 3));
+                    }
+
+                    postAdapter.setPosts(posts);
+                    recyclerView.setAdapter(postAdapter);
+
 
                    //หลัง with ใส่ Activity เด้อ
                }

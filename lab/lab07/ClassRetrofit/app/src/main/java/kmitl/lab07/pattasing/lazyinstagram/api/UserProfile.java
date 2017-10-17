@@ -1,5 +1,9 @@
 package kmitl.lab07.pattasing.lazyinstagram.api;
 
+import java.util.List;
+
+import kmitl.lab07.pattasing.lazyinstagram.model.Posts;
+
 public class UserProfile {
     private String user;
     private String urlProfile;
@@ -9,6 +13,8 @@ public class UserProfile {
     private int following;
     private int post;
     private String bio;
+
+    private List<Posts> posts;
 
     public String getUser() {
         return user;
@@ -57,5 +63,13 @@ public class UserProfile {
 
     public void setBio(String bio) {
         this.bio = bio;
+    }
+
+    public List<Posts> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(List<Posts> posts) {
+        this.posts = posts;
     }
 }

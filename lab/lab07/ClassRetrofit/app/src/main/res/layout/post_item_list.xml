@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <ImageView
+        android:id="@+id/image2"
+        android:scaleType="centerCrop"
+        android:layout_width="389dp"
+        android:layout_height="325dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="29dp"
+        android:layout_height="26dp"
+        app:srcCompat="@mipmap/ic_chat"
+        app:layout_constraintBottom_toBottomOf="@+id/image2"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="34dp"
+        app:layout_constraintLeft_toLeftOf="@+id/image2"
+        app:layout_constraintTop_toTopOf="@+id/image2"
+        android:layout_marginTop="8dp"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/textLike"
+        android:layout_width="25dp"
+        android:layout_height="26dp"
+        android:gravity="center"
+        android:text="0"
+        app:layout_constraintLeft_toRightOf="@+id/imageLike"
+        android:layout_marginLeft="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/image2"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintTop_toTopOf="@+id/image2"
+        android:layout_marginTop="8dp"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <ImageView
+        android:id="@+id/imageLike"
+        android:layout_width="27dp"
+        android:layout_height="26dp"
+        app:srcCompat="@mipmap/ic_heart"
+        app:layout_constraintLeft_toRightOf="@+id/textComment"
+        android:layout_marginLeft="-17dp"
+        app:layout_constraintBottom_toBottomOf="@+id/image2"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintTop_toTopOf="@+id/image2"
+        android:layout_marginTop="8dp"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/textComment"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:gravity="center"
+        android:text="0"
+        app:layout_constraintLeft_toRightOf="@+id/imageView2"
+        android:layout_marginLeft="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/image2"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintTop_toTopOf="@+id/image2"
+        android:layout_marginTop="8dp"
+        app:layout_constraintVertical_bias="1.0" />
+
+</android.support.constraint.ConstraintLayout>
