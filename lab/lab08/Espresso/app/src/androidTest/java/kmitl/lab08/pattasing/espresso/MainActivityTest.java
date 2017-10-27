@@ -10,6 +10,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.Espresso.pressBack;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static android.support.test.espresso.action.ViewActions.replaceText;
@@ -64,9 +65,14 @@ public class MainActivityTest {
         onView(withRecyclerView(R.id.list)
                 .atPositionOnView(0, R.id.textAge))
                 .check(matches(withText("20")));
+        onView(allOf(withId(R.id.buttonClear), withText("CLEAR LIST"))).perform(click());
+        onView(withText("Not Found")).check(matches(isDisplayed()));
     }
     @Test
     public void mainActivityTest6() {
+        onView(withId(R.id.editTExtName)).perform(replaceText("Ying"), closeSoftKeyboard());
+        onView(withId(R.id.editTextAge)).perform(replaceText("20"), closeSoftKeyboard());
+        onView(allOf(withId(R.id.buttonAdded), withText("ADDED"))).perform(click());
         onView(withId(R.id.editTExtName)).perform(replaceText("Ladarat"), closeSoftKeyboard());
         onView(withId(R.id.editTextAge)).perform(replaceText("20"), closeSoftKeyboard());
         onView(allOf(withId(R.id.buttonAdded), withText("ADDED"))).perform(click());
@@ -77,9 +83,17 @@ public class MainActivityTest {
         onView(withRecyclerView(R.id.list)
                 .atPositionOnView(1, R.id.textAge))
                 .check(matches(withText("20")));
+        onView(allOf(withId(R.id.buttonClear), withText("CLEAR LIST"))).perform(click());
+        onView(withText("Not Found")).check(matches(isDisplayed()));
     }
     @Test
     public void mainActivityTest7() {
+        onView(withId(R.id.editTExtName)).perform(replaceText("Ying"), closeSoftKeyboard());
+        onView(withId(R.id.editTextAge)).perform(replaceText("20"), closeSoftKeyboard());
+        onView(allOf(withId(R.id.buttonAdded), withText("ADDED"))).perform(click());
+        onView(withId(R.id.editTExtName)).perform(replaceText("Ladarat"), closeSoftKeyboard());
+        onView(withId(R.id.editTextAge)).perform(replaceText("20"), closeSoftKeyboard());
+        onView(allOf(withId(R.id.buttonAdded), withText("ADDED"))).perform(click());
         onView(withId(R.id.editTExtName)).perform(replaceText("Somkait"), closeSoftKeyboard());
         onView(withId(R.id.editTextAge)).perform(replaceText("80"), closeSoftKeyboard());
         onView(allOf(withId(R.id.buttonAdded), withText("ADDED"))).perform(click());
@@ -90,9 +104,20 @@ public class MainActivityTest {
         onView(withRecyclerView(R.id.list)
                 .atPositionOnView(2, R.id.textAge))
                 .check(matches(withText("80")));
+        onView(allOf(withId(R.id.buttonClear), withText("CLEAR LIST"))).perform(click());
+        onView(withText("Not Found")).check(matches(isDisplayed()));
     }
     @Test
     public void mainActivityTest8() {
+        onView(withId(R.id.editTExtName)).perform(replaceText("Ying"), closeSoftKeyboard());
+        onView(withId(R.id.editTextAge)).perform(replaceText("20"), closeSoftKeyboard());
+        onView(allOf(withId(R.id.buttonAdded), withText("ADDED"))).perform(click());
+        onView(withId(R.id.editTExtName)).perform(replaceText("Ladarat"), closeSoftKeyboard());
+        onView(withId(R.id.editTextAge)).perform(replaceText("20"), closeSoftKeyboard());
+        onView(allOf(withId(R.id.buttonAdded), withText("ADDED"))).perform(click());
+        onView(withId(R.id.editTExtName)).perform(replaceText("Somkait"), closeSoftKeyboard());
+        onView(withId(R.id.editTextAge)).perform(replaceText("80"), closeSoftKeyboard());
+        onView(allOf(withId(R.id.buttonAdded), withText("ADDED"))).perform(click());
         onView(withId(R.id.editTExtName)).perform(replaceText("Prayoch"), closeSoftKeyboard());
         onView(withId(R.id.editTextAge)).perform(replaceText("60"), closeSoftKeyboard());
         onView(allOf(withId(R.id.buttonAdded), withText("ADDED"))).perform(click());
@@ -103,9 +128,23 @@ public class MainActivityTest {
         onView(withRecyclerView(R.id.list)
                 .atPositionOnView(3, R.id.textAge))
                 .check(matches(withText("60")));
+        onView(allOf(withId(R.id.buttonClear), withText("CLEAR LIST"))).perform(click());
+        onView(withText("Not Found")).check(matches(isDisplayed()));
     }
     @Test
     public void mainActivityTest9() {
+        onView(withId(R.id.editTExtName)).perform(replaceText("Ying"), closeSoftKeyboard());
+        onView(withId(R.id.editTextAge)).perform(replaceText("20"), closeSoftKeyboard());
+        onView(allOf(withId(R.id.buttonAdded), withText("ADDED"))).perform(click());
+        onView(withId(R.id.editTExtName)).perform(replaceText("Ladarat"), closeSoftKeyboard());
+        onView(withId(R.id.editTextAge)).perform(replaceText("20"), closeSoftKeyboard());
+        onView(allOf(withId(R.id.buttonAdded), withText("ADDED"))).perform(click());
+        onView(withId(R.id.editTExtName)).perform(replaceText("Somkait"), closeSoftKeyboard());
+        onView(withId(R.id.editTextAge)).perform(replaceText("80"), closeSoftKeyboard());
+        onView(allOf(withId(R.id.buttonAdded), withText("ADDED"))).perform(click());
+        onView(withId(R.id.editTExtName)).perform(replaceText("Prayoch"), closeSoftKeyboard());
+        onView(withId(R.id.editTextAge)).perform(replaceText("60"), closeSoftKeyboard());
+        onView(allOf(withId(R.id.buttonAdded), withText("ADDED"))).perform(click());
         onView(withId(R.id.editTExtName)).perform(replaceText("Prayoch"), closeSoftKeyboard());
         onView(withId(R.id.editTextAge)).perform(replaceText("50"), closeSoftKeyboard());
         onView(allOf(withId(R.id.buttonAdded), withText("ADDED"))).perform(click());
@@ -116,6 +155,8 @@ public class MainActivityTest {
         onView(withRecyclerView(R.id.list)
                 .atPositionOnView(4, R.id.textAge))
                 .check(matches(withText("50")));
+        onView(allOf(withId(R.id.buttonClear), withText("CLEAR LIST"))).perform(click());
+        onView(withText("Not Found")).check(matches(isDisplayed()));
     }
     @Test
     public void mainActivityTest91() {
