@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textItemSymbol"
+        android:layout_width="27dp"
+        android:layout_height="28dp"
+        android:background="@color/WHITE"
+        android:gravity="center"
+        android:text="+"
+        android:textSize="16dp"
+        tools:layout_editor_absoluteX="26dp"
+        tools:layout_editor_absoluteY="0dp" />
+
+    <TextView
+        android:id="@+id/textItemList"
+        android:layout_width="203dp"
+        android:layout_height="28dp"
+        android:gravity="left|center"
+        android:text="เงินเดือน"
+        android:textSize="16dp"
+        app:layout_constraintStart_toEndOf="@+id/textItemSymbol"
+        tools:layout_editor_absoluteY="0dp" />
+
+    <TextView
+        android:id="@+id/textItemAmount"
+        android:layout_width="84dp"
+        android:layout_height="28dp"
+        android:gravity="right"
+        android:text="200000"
+        android:textSize="16dp"
+        app:layout_constraintStart_toEndOf="@+id/textItemList"
+        tools:layout_editor_absoluteY="0dp" />
+
+</android.support.constraint.ConstraintLayout>
