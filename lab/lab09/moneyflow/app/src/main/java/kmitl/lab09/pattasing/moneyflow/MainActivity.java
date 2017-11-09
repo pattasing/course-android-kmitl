@@ -169,6 +169,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         intent.putExtra("itemType", moneyTableListGlobal.get(i).getType());
         intent.putExtra("itemList", moneyTableListGlobal.get(i).getTextList());
         intent.putExtra("itemAmount", moneyTableListGlobal.get(i).getAmount()+"");
+        intent.putExtra("itemId", moneyTableListGlobal.get(i).getId()+"");
         startActivityForResult(intent, RESULT_UP);
     }
 }

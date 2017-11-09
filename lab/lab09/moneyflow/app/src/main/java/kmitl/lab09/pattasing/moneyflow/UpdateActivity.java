@@ -19,6 +19,7 @@ public class UpdateActivity extends AppCompatActivity implements View.OnClickLis
     private TextView textOutCome;
     private String type;
     private MoneyTable moneyTable;
+    private String id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +34,7 @@ public class UpdateActivity extends AppCompatActivity implements View.OnClickLis
 
         Intent intent = getIntent();
         type = intent.getStringExtra("itemType");
+        id = intent.getStringExtra("itemId");
         editTextAmount.setText(intent.getStringExtra("itemAmount")+"");
         editTextList.setText(intent.getStringExtra("itemList"));
         textOutCome.setOnClickListener(this);
@@ -74,6 +76,7 @@ public class UpdateActivity extends AppCompatActivity implements View.OnClickLis
                     @Override
                     protected MoneyTable doInBackground(Void... voids) {
                         moneyTable = new MoneyTable();
+                        moneyTable.setId(Integer.parseInt(id));
                         moneyTable.setType(type);
                         moneyTable.setTextList(editTextList.getText().toString());
                         moneyTable.setAmount(Double.parseDouble(editTextAmount.getText().toString()));
@@ -84,6 +87,9 @@ public class UpdateActivity extends AppCompatActivity implements View.OnClickLis
                 }.execute();
 
                 Intent intent = new Intent();
+                intent.putExtra("itemType", type);
+                intent.putExtra("itemList", editTextList.getText().toString());
+                intent.putExtra("itemAmount", editTextAmount.getText().toString());
                 setResult(RESULT_OK, intent);
                 finish();
             }else {

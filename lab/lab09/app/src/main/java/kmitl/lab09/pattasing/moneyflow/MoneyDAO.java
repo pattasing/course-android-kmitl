@@ -20,6 +20,6 @@ interface MoneyDAO {
     public void deleteLine(MoneyTable moneyTable);
 
     @Update
-    void update(MoneyTable moneyTable);
+    void updateLine(MoneyTable moneyTable);
 
 }

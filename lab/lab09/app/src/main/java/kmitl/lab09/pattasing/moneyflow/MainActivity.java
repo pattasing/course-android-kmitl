@@ -18,20 +18,18 @@ import android.widget.Toast;
 
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemLongClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemLongClickListener, AdapterView.OnItemClickListener {
 
     private Button buttonAdd;
     private ListView list;
     private int RESULT_ADD = 234;
     private CustomAdapter adapter;
-    //    private ArrayAdapter<MoneyTable> adapter;
     private TextView textTotal;
-    MoneyTable moneyTable;
-    Parcelable wrapped;
     private int RESULT_UP = 235;
     private List<MoneyTable> moneyTableListGlobal;
     private int indexForDelete;
     private TextView tip;
+    private int indexForUpdate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +42,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         buttonAdd.setOnClickListener(this);
         list = (ListView) findViewById(R.id.listView);
         list.setOnItemLongClickListener(this);
+        list.setOnItemClickListener(this);
         textTotal = (TextView) findViewById(R.id.total);
         tip = (TextView) findViewById(R.id.textViewTip);
     }
@@ -58,11 +57,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode == RESULT_ADD && resultCode == RESULT_OK) {
-            Toast.makeText(MainActivity.this,"Add Success",Toast.LENGTH_LONG).show();
             calMoney();
-//            Toast.makeText(MainActivity.this,"Add Success",Toast.LENGTH_LONG).show();
+            Toast.makeText(MainActivity.this,"Add Success",Toast.LENGTH_LONG).show();
         }
         else if(requestCode == RESULT_UP && resultCode == RESULT_OK){
+            System.out.println(data.getStringExtra("itemType"));
             calMoney();
             Toast.makeText(MainActivity.this,"Update Success",Toast.LENGTH_LONG).show();
         }
@@ -80,7 +79,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             protected List<MoneyTable> doInBackground(Void... voids) {
                 List<MoneyTable> moneyTableslist = moneyDB.getMoneyDAO()
                         .getAll();
-//                moneyTableListGlobal = moneyTableslist;
                 return moneyTableslist;
             }
 
@@ -143,9 +141,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     }
                 }.execute();
 
-
-//                moneyDB.getMoneyDAO().deleteLine(moneyTable);
-//                adapter.notifyDataSetChanged();
                 calMoney();
                 Toast.makeText(MainActivity.this,"Deletetd",Toast.LENGTH_LONG).show();
             }
@@ -161,5 +156,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
         return false;
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        indexForUpdate = i;
+        Intent intent = new Intent(MainActivity.this, UpdateActivity.class);
+        intent.putExtra("itemType", moneyTableListGlobal.get(i).getType());
+        intent.putExtra("itemList", moneyTableListGlobal.get(i).getTextList());
+        intent.putExtra("itemAmount", moneyTableListGlobal.get(i).getAmount()+"");
+        intent.putExtra("itemId", moneyTableListGlobal.get(i).getId()+"");
+        startActivityForResult(intent, RESULT_UP);
     }
 }
