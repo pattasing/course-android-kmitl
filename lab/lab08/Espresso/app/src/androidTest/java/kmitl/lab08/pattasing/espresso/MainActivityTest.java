@@ -158,12 +158,12 @@ public class MainActivityTest {
         onView(allOf(withId(R.id.buttonClear), withText("CLEAR LIST"))).perform(click());
         onView(withText("Not Found")).check(matches(isDisplayed()));
     }
-    @Test
-    public void mainActivityTest91() {
-        onView(allOf(withId(R.id.buttonGotoList), withText("GO TO LIST"))).perform(click());
-        onView(allOf(withId(R.id.buttonClear), withText("CLEAR LIST"))).perform(click());
-        onView(withText("Not Found")).check(matches(isDisplayed()));
-    }
+//    @Test
+//    public void mainActivityTest91() {
+//        onView(allOf(withId(R.id.buttonGotoList), withText("GO TO LIST"))).perform(click());
+//        onView(allOf(withId(R.id.buttonClear), withText("CLEAR LIST"))).perform(click());
+//        onView(withText("Not Found")).check(matches(isDisplayed()));
+//    }
 
 
 }
